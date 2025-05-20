@@ -1,4 +1,4 @@
-package com.example.tp1.ui.theme
+package com.example.tp2a.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -15,12 +15,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.tp2a.ui.theme.*
 import kotlin.random.Random
-import com.example.tp1.ui.theme.Nord0
-import com.example.tp1.ui.theme.Nord1
-import com.example.tp1.ui.theme.Nord2
-import com.example.tp1.ui.theme.Nord3
-import com.example.tp1.ui.theme.Nord4
-import com.example.tp1.ui.theme.White
+import com.example.tp2a.ui.theme.Nord0
+import com.example.tp2a.ui.theme.Nord1
+import com.example.tp2a.ui.theme.Nord2
+import com.example.tp2a.ui.theme.Nord3
+import com.example.tp2a.ui.theme.Nord4
+import com.example.tp2a.ui.theme.White
 
 @Composable
 fun GuessGameScreen() {
