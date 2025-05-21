@@ -2,6 +2,7 @@ package com.example.tp2b
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -31,7 +32,7 @@ fun MainScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    CapitalCitiesTheme(dynamicColor = false) { // Aquí se desactiva el color dinámico
+    CapitalCitiesTheme(dynamicColor = false) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
 
@@ -80,14 +81,16 @@ fun MainScreen(
                     )
                 }
 
-                Row(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    horizontalAlignment = Alignment.CenterHorizontally, //centro los botones horizontalmente
+                    verticalArrangement = Arrangement.spacedBy(8.dp) //espacio vertical entre botones
                 ) {
                     Button(
                         onClick = { onNavigate(CapitalCityScreen.Search) },
+                        modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -100,6 +103,7 @@ fun MainScreen(
 
                     Button(
                         onClick = { onNavigate(CapitalCityScreen.Delete) },
+                        modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -112,6 +116,7 @@ fun MainScreen(
 
                     Button(
                         onClick = { onNavigate(CapitalCityScreen.DeleteByCountry) },
+                        modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -124,6 +129,7 @@ fun MainScreen(
 
                     Button(
                         onClick = { onNavigate(CapitalCityScreen.UpdatePopulation) },
+                        modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary

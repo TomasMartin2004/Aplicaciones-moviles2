@@ -1,51 +1,37 @@
 package com.example.tp2b
 
 import com.example.tp2b.model.CapitalCity
+import kotlinx.coroutines.flow.Flow
 
-class CapitalCityRepository {
-    private val cities = mutableListOf<CapitalCity>()
+class CapitalCityRepository(private val capitalCityDao: CapitalCityDao) {
 
     //1. cargar una ciudad capital
-    fun addCity(city: CapitalCity) {
-        cities.add(city)
+    suspend fun addCity(city: CapitalCity) {
+        capitalCityDao.insertCity(city)
     }
 
     //2. consultar una ciudad por su nombre
-    fun findCityByName(cityName: String): CapitalCity? {
-        return cities.find { it.cityName.equals(cityName, ignoreCase = true) }
+    suspend fun findCityByName(cityName: String): CapitalCity? {
+        return capitalCityDao.findCityByName(cityName)
     }
 
     //3. borrar una ciudad ingresando su nombre
-    fun deleteCityByName(cityName: String): Boolean {
-        val city = findCityByName(cityName)
-        return if (city != null) {
-            cities.remove(city)
-            true
-        } else {
-            false
-        }
+    suspend fun deleteCityByName(cityName: String): Boolean {
+        return capitalCityDao.deleteCityByName(cityName) > 0
     }
 
-    //4. borrar todas las ciudades de un pais
-    fun deleteAllCitiesFromCountry(countryName: String): Int {
-        val citiesToRemove = cities.filter { it.countryName.equals(countryName, ignoreCase = true) }
-        cities.removeAll(citiesToRemove)
-        return citiesToRemove.size
+    //4. borrar todas las ciudades de un país
+    suspend fun deleteAllCitiesFromCountry(countryName: String): Int {
+        return capitalCityDao.deleteAllCitiesFromCountry(countryName)
     }
 
     //5. modificar la poblacion de una ciudad
-    fun updateCityPopulation(cityName: String, newPopulation: Long): Boolean {
-        val city = findCityByName(cityName)
-        return if (city != null) {
-            city.population = newPopulation
-            true
-        } else {
-            false
-        }
+    suspend fun updateCityPopulation(cityName: String, newPopulation: Long): Boolean {
+        return capitalCityDao.updateCityPopulation(cityName, newPopulation) > 0
     }
 
-    //metodo adicional para obtener todas las ciudades
-    fun getAllCities(): List<CapitalCity> {
-        return cities.toList()
+    // metodo adicional para obtener todas las ciudades.
+    fun getAllCities(): Flow<List<CapitalCity>> {
+        return capitalCityDao.getAllCities()
     }
 }
